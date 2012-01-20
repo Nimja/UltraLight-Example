@@ -1,0 +1,88 @@
+*, div, p, td, div, h1, h2, h3, input, select, textarea, form, img {
+	vertical-align: top;
+	border: 0px solid #abc;
+	padding: 0px;
+	margin: 0px;
+	border-collapse: collapse;
+}
+
+body {
+	background:#eee;
+	color: #333;
+	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+	padding: 20px;
+}
+
+/* ---- Basic styles ---- */
+
+h1, h2, h3, h4, h5, i{
+	color: black;
+	font-weight: bold;
+	font-family: Georgia, serif;
+	font-style: italic;
+}
+h1 { font-size: 24px; }
+h2 { font-size: 21px; }
+h3 { font-size: 18px; }
+h4 { font-size: 16px; }
+h4 { font-size: 14px; }
+
+i {
+	font-weight: normal;
+	color: #654;
+}
+
+a {
+	text-decoration: none;
+	color: #456;
+}
+ul { margin-left: 20px; }
+p { margin-bottom: 10px; }
+
+hr { border-top: 2px solid #ccc; }
+
+.clear { clear: both; }
+
+/* --- Copyright */
+
+.copyright {
+	color: #999;
+	font-size: 12px;
+	width: 400px;
+	margin: 10px auto;
+}
+.copyright img {
+	margin-right: 10px;
+}
+
+
+/* --- Container */
+#site_container {
+	margin: 20px;
+	padding: 10px;
+	background: white;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+}
+
+.button {
+	display: block;
+	float: left;
+	padding: 2px 10px;
+	margin: 5px;
+	height: auto;
+	width: auto;
+
+	font-size: 150%;
+
+    background-color:#f5f5f5;
+    border:1px solid #dedede;
+    color:#565656;
+}
+.button:hover {
+	background-color:#dff4ff;
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
