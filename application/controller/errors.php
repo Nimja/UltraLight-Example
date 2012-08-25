@@ -7,9 +7,7 @@ class Page
 
 	function __construct()
 	{
-		Load::library('view');
-
-		echo View::show('header', array(
+		echo Library_View::show('header', array(
 			'title' => 'Nimja.com - UltraLight Errors Example',
 			'base_url' => $GLOBALS['config']['base_url']
 		));
@@ -24,13 +22,15 @@ class Page
 			'Unescaped GET' => $_GET,
 		);
 
-		show($test, 'This is an export of test');
+		Show::info($test, 'This is an export of test');
 
-		show_error('This is an error, something went wrong.', 'Some error.');
+		Show::error('This is an error, something went wrong.', 'Some error.');
 
-		show('Custom outside background color', 'Some message', 'green');
+		Show::info('Custom outside background color', 'Some message', 'green');
 
-		show_exit('This is a fatal error.');
+        Load::show('test');
+        
+		Show::fatal('This is a fatal error.');
 		
 		echo 'This will not be shown.';
 	}
