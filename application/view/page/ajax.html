@@ -1,0 +1,18 @@
+<p>This is a simple example of an ajax request.</p>
+<p id="testButton" class="button">Just press this text!</p>
+<div id="testResult" class="clear" style="margin: 20px; height: 80px;"></div>
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script>
+    var clicked = 0;
+    $('#testButton').click(function() {
+        clicked++;
+        $('#testResult').html('Loading...');
+        $.post('/ajax/example', {clicked: clicked}, function(data) {
+            var date = new Date(data.time * 1000);
+            var text = "<p>Time: " + date.toUTCString() + "</p>";
+            text += "<p>Message: <b>" + data.content.message + "</b></p>";
+            text += "<p>" + data.content.clicked + "</p>";
+            $('#testResult').html(text);
+        }, 'json');
+    });
+</script>

@@ -86,3 +86,21 @@ hr { border-top: 2px solid #ccc; }
     border:1px solid #c2e1ef;
     color:#336699;
 }
+.section {
+    float: left;
+    border-width: 1px;
+    background: white;
+    margin: 10px;
+    padding: 5px;
+}
+.section ul {
+    list-style: circle;
+}
+.section a {
+    display: block;
+    margin-left: -20px;
+    padding-left: 20px;
+}
+.section .current a {
+    background: #eee;
+}

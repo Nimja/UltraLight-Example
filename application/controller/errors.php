@@ -1,38 +1,46 @@
 <?php
 /**
- * Basic show errors page.
+ * Page displaying the various error messages.
+ *
+ * note: This page breaks some code design principles on purpose.
  */
-class Page
+class Page extends Controller_Abstract
 {
 
-	function __construct()
-	{
-		echo Library_View::show('header', array(
-			'title' => 'Nimja.com - UltraLight Errors Example',
-			'base_url' => $GLOBALS['config']['base_url']
-		));
-		echo '<a href="/" class="button">Back to the index.</a>';
-		echo '<div class="clear"></div>';
-
+    protected function _run()
+    {
+        $buttons = array(
+            '' => 'Back to index',
+            'testajax' => "AJAX example",
+            'source/controller/ajax' => 'View source',
+            'wrong' => 'Bad controller',
+        );
+        echo $this->_show(
+            'page',
+            array(
+                'title' => 'Nimja.com - UltraLight Errors Example',
+                'buttons' => new Library_Buttons($buttons),
+                'content' => Library_Format::parse($this->_show('page/errors')),
+            )
+        );
+        $array = array(true, 1, "String", 'last' => null);
+        $obj = new stdClass();
+        $obj->boolean = true;
+        $obj->integer = 1;
+        $obj->string = "String";
+        $obj->null = null;
 		$test = array(
 			'This is an example',
-			array(1, 2, 3, 4, 5, 6, 7, 8),
+			$array,
+            $obj,
 			"<a href=''></a>",
-			'Donec a felis felis, a pulvinar eros. Cras vel tincidunt risus. Duis non sapien quis leo iaculis vestibulum a non massa. Vestibulum congue dui ac libero hendrerit eget aliquam lectus pellentesque. Nunc sit amet mi nibh, vel fringilla justo. Donec sollicitudin quam eget odio mollis eget aliquet est vulputate. Curabitur ultricies accumsan libero, vitae ornare quam ullamcorper a. Pellentesque convallis euismod ipsum sed euismod. Sed commodo mollis sapien, vitae pulvinar mi vehicula vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
+			'alert("Test!");',
 			'Unescaped GET' => $_GET,
 		);
-
-		Show::info($test, 'This is an export of test');
-
-		Show::error('This is an error, something went wrong.', 'Some error.');
-
-		Show::info('Custom outside background color', 'Some message', 'green');
-
-        Load::show('test');
-        
-		Show::fatal('This is a fatal error.');
-		
-		echo 'This will not be shown.';
-	}
-
+		Show::debug($test);
+        Show::info('Info message example.');
+        Show::error('Error message example.');
+		Show::info('Message with custom color/title', 'Custom Title', '#00FF00');
+        Example_Of_Non_Existent_Class::test();
+    }
 }
