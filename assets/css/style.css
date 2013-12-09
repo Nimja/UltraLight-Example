@@ -1,27 +1,32 @@
 *, div, p, td, div, h1, h2, h3, input, select, textarea, form, img {
-	vertical-align: top;
-	border: 0px solid #abc;
-	padding: 0px;
-	margin: 0px;
-	border-collapse: collapse;
+    vertical-align: top;
+    border: 0px solid #abc;
+    padding: 0px;
+    margin: 0px;
+    border-collapse: collapse;
 }
 
 body {
-	background:#eee;
-	color: #333;
-	font-size: 14px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-align: left;
-	padding: 20px;
+    background:#eee;
+    color: #333;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+    padding: 20px;
+}
+clear {
+    display: block;
+    clear: both;
 }
 
 /* ---- Basic styles ---- */
 
 h1, h2, h3, h4, h5, i{
-	color: black;
-	font-weight: bold;
-	font-family: Georgia, serif;
-	font-style: italic;
+    color: black;
+    font-weight: bold;
+    font-family: Georgia, serif;
+    font-style: italic;
+    margin: 10px 0px;
 }
 h1 { font-size: 24px; }
 h2 { font-size: 21px; }
@@ -30,13 +35,13 @@ h4 { font-size: 16px; }
 h4 { font-size: 14px; }
 
 i {
-	font-weight: normal;
-	color: #654;
+    font-weight: normal;
+    color: #654;
 }
 
 a {
-	text-decoration: none;
-	color: #456;
+    text-decoration: none;
+    color: #456;
 }
 ul { margin-left: 20px; }
 p { margin-bottom: 10px; }
@@ -48,41 +53,41 @@ hr { border-top: 2px solid #ccc; }
 /* --- Copyright */
 
 .copyright {
-	color: #999;
-	font-size: 12px;
-	width: 400px;
-	margin: 10px auto;
+    color: #999;
+    font-size: 12px;
+    width: 400px;
+    margin: 10px auto;
 }
 .copyright img {
-	margin-right: 10px;
+    margin-right: 10px;
 }
 
 
 /* --- Container */
 #site_container {
-	margin: 20px;
-	padding: 10px;
-	background: white;
-	border: 2px solid #ccc;
-	border-radius: 5px;
+    margin: 20px;
+    padding: 10px;
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 5px;
 }
 
 .button {
-	display: block;
-	float: left;
-	padding: 2px 10px;
-	margin: 5px;
-	height: auto;
-	width: auto;
+    display: block;
+    float: left;
+    padding: 2px 10px;
+    margin: 5px;
+    height: auto;
+    width: auto;
 
-	font-size: 150%;
+    font-size: 150%;
 
     background-color:#f5f5f5;
     border:1px solid #dedede;
     color:#565656;
 }
 .button:hover {
-	background-color:#dff4ff;
+    background-color:#dff4ff;
     border:1px solid #c2e1ef;
     color:#336699;
 }
@@ -103,4 +108,67 @@ hr { border-top: 2px solid #ccc; }
 }
 .section .current a {
     background: #eee;
+}
+form fieldset {
+    border: 1px solid black;
+    margin: 20px;
+    padding: 20px;
+}
+form fieldset legend {
+    font-size: 200%;
+}
+form field {
+    font-size: 150%;
+}
+form field {
+    display: block;
+    margin: 5px;
+    border-bottom: 1px solid #eee;
+}
+form field label span {
+    float: left;
+    width: 30%;
+}
+form field input,
+form field textarea,
+form field select
+{
+    font-size: inherit;
+    float: right;
+    width: 65%;
+    background: white;
+    color: black;
+    border: 1px solid black;
+}
+form field.text label span {
+    float: none;
+    width: auto;
+}
+form field label textarea {
+    display: block;
+    float: none;
+    height: 100px;
+    width: 100%;
+}
+form field.submit {
+    border-width: 0px;
+}
+form field.submit input
+{
+    float: none;
+    display: block;
+    margin: 0px auto;
+    width: 50%;
+    background: #eee;
+    color: black;
+    border: 1px solid black;
+}
+form field.checkbox label span {
+    float: right;
+    width: 60%;
+}
+form field.checkbox label input {
+    float: left;
+    width: auto;
+    margin-left: 35%;
 }

@@ -1,8 +1,9 @@
 <?php
+namespace App\Library;
 /**
  * Example of a class for the library
  */
-class Library_Buttons
+class Buttons
 {
     /**
      * Buttons as array with link => name.

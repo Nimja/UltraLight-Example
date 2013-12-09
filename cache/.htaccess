@@ -1,0 +1,2 @@
+#No access to cache from outside.
+deny from all

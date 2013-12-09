@@ -1,8 +1,9 @@
 <?php
+namespace App\Controller\Tools;
 /**
  * Simple index page, with some buttons for show.
  */
-class Page extends Controller_Abstract
+class Source extends \Core\Controller
 {
     const TYPE_CONTROLLER = 'controller';
     const TYPE_LIBRARY = 'library';
@@ -19,8 +20,9 @@ class Page extends Controller_Abstract
             'files' => array(
                 'index',
                 'errors',
+                'form',
                 'wrong',
-                'testajax',
+                'ajax',
                 'ajax/example',
                 'tools/source',
             )
@@ -42,7 +44,6 @@ class Page extends Controller_Abstract
             )
         ),
     );
-
     /**
      * Current type.
      * @var string
@@ -53,6 +54,7 @@ class Page extends Controller_Abstract
      * @var string
      */
     private $_file;
+
     /**
      * Show the page.
      * @return string
@@ -60,17 +62,17 @@ class Page extends Controller_Abstract
     protected function _run()
     {
         $buttons = array(
-            '' => 'Back to Index',
+            '' => 'Home',
         );
-        $parts = explode('/', Core::$rest);
+        $parts = explode('/', \Core::$rest);
         $this->_type = array_shift($parts);
         $this->_file = implode('/', $parts);
         if (!isset($this->_config[$this->_type])) {
-            Core::redirect(self::REDIRECT_TARGET);
+            \Request::redirect(self::REDIRECT_TARGET);
         }
         $config = $this->_config[$this->_type];
         if (!in_array($this->_file, $config['files'])) {
-            Core::redirect('/source/controller/index');
+            \Request::redirect('/source/controller/index');
         }
         if ($this->_type == self::TYPE_CONTROLLER) {
             $buttons[$this->_file] = 'View normal';
@@ -81,7 +83,7 @@ class Page extends Controller_Abstract
                 array(
                 'content' => $this->_createList() . highlight_file($fileName, true),
                 'title' => "Source for $this->_file",
-                'buttons' => new Library_Buttons($buttons),
+                'buttons' => new \App\Library\Buttons($buttons),
                 )
         );
     }
@@ -96,7 +98,7 @@ class Page extends Controller_Abstract
         foreach ($this->_config as $name => $section) {
             $result[] = $this->_createSection($name, $section);
         }
-        return implode(PHP_EOL, $result) . '<div class="clear"></div>';
+        return '<div style="float: right;">' . implode(PHP_EOL, $result) . '</div>';
     }
 
     /**

@@ -1,8 +1,9 @@
 <?php
+namespace App\Controller\Ajax;
 /**
  * Simple index page, with some buttons for show.
  */
-class Page extends Controller_Ajax
+class Example extends \Core\Controller\Ajax
 {
 
     protected function _run()
@@ -24,7 +25,7 @@ class Page extends Controller_Ajax
             'earth',
         );
         shuffle($world);
-        $clicked = Request::value('clicked');
+        $clicked = \Request::value('clicked');
         return array(
             'message' => "{$hello[0]} {$world[0]}!",
             'clicked' => "You have clicked $clicked times!",
