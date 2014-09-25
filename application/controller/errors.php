@@ -5,19 +5,12 @@ namespace App\Controller;
  *
  * note: This page breaks some code design principles on purpose.
  */
-class Errors extends \App\Controller\Index
+class Errors extends Index
 {
 
     protected function _run()
     {
-        echo $this->_show(
-            'page',
-            array(
-                'title' => 'Nimja.com - UltraLight Errors Example',
-                'buttons' => $this->_getButtons(),
-                'content' => $this->_show('page/errors', null, true),
-            )
-        );
+        echo $this->_output('Error Example', $this->_show('page/errors', null, true));
         $array = array(true, 1, "String", 'last' => null);
         $obj = new \stdClass();
         $obj->boolean = true;

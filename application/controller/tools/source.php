@@ -1,12 +1,10 @@
-<?php
-namespace App\Controller\Tools;
+<?php namespace App\Controller\Tools;
 /**
  * Simple index page, with some buttons for show.
  */
-class Source extends \Core\Controller
+class Source extends \App\Controller\Index
 {
     const TYPE_CONTROLLER = 'controller';
-    const TYPE_LIBRARY = 'library';
     const TYPE_VIEW = 'view';
     const REDIRECT_TARGET = '/source/controller/index';
     /**
@@ -25,13 +23,6 @@ class Source extends \Core\Controller
                 'ajax',
                 'ajax/example',
                 'tools/source',
-            )
-        ),
-        self::TYPE_LIBRARY => array(
-            'fileBase' => 'library/',
-            'extension' => 'php',
-            'files' => array(
-                'buttons',
             )
         ),
         self::TYPE_VIEW => array(
@@ -78,14 +69,7 @@ class Source extends \Core\Controller
             $buttons[$this->_file] = 'View normal';
         }
         $fileName = PATH_APP . "{$config['fileBase']}{$this->_file}.{$config['extension']}";
-        return $this->_show(
-                'page',
-                array(
-                'content' => $this->_createList() . highlight_file($fileName, true),
-                'title' => "Source for $this->_file",
-                'buttons' => new \App\Library\Buttons($buttons),
-                )
-        );
+        return $this->_output("Source for {$this->_file}", $this->_createList() . highlight_file($fileName, true));
     }
 
     /**

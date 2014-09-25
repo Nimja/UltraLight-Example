@@ -1,5 +1,4 @@
-<?php
-namespace App\Controller;
+<?php namespace App\Controller;
 /**
  * By exception we allow this to be present.
  */
@@ -9,34 +8,60 @@ namespace App\Controller;
  */
 class Index extends \Core\Controller
 {
+    /**
+     * All menu buttons for this controller.
+     * @var array
+     */
+    protected $_buttons = array(
+        'Home' => '/',
+        'Examples' => array(
+            'Form Example' => '/form',
+            'AJAX example' => '/ajax',
+            'Error example' => '/errors',
+            'Wrong page' => '/wrong',
+        ),
+        'View source' => 'source/controller/$url',
+        'Debug' => '/$url?debug=true'
+    );
 
     protected function _run()
     {
-        return $this->_show(
-            'page',
-            array(
-                'content' => $this->_show('page/features', array('transform' => 'example|transform|text'), true),
-                'title' => 'UltraLight - Example Project',
-                'buttons' => $this->_getButtons()
-            )
+        return $this->_output(
+                'Features', $this->_show('page/features', array('transform' => 'example|transform|text'), true)
         );
     }
 
     /**
-     *
-     * @return \App\Library\Buttons
+     * Create page output.
+     * @param string $title
+     * @param string $content
+     * @return string
      */
-    protected function _getButtons()
+    protected function _output($title, $content)
     {
-        $url = \Core::$url ? : 'index';
-        $buttons = array(
-            '' => 'Home',
-            'form' => "Form Example",
-            'ajax' => "AJAX example",
-            'errors?value=From+' . ucfirst($url) => "Error example",
-            'source/controller/' . $url => "View source",
-            $url . '?debug=true' => "View debug info"
+        $buttons = $this->_getButtons($this->_buttons);
+        return $this->_show('page',
+                array(
+                'title' => 'UltraLight Showcase',
+                'page' => $title,
+                'menu' => new \Core\Bootstrap\Navbar('UltraLight', $buttons, \Core::$url,
+                    'navbar-inverse navbar-fixed-top'),
+                'content' => $content
+                )
         );
-        return new \App\Library\Buttons($buttons);
+    }
+
+    /**
+     * Get buttons array with url replaced.
+     * @return array
+     */
+    private function _getButtons($buttons)
+    {
+        $result = array();
+        $url = \Core::$url;
+        foreach ($buttons as $key => $value) {
+            $result[$key] = !is_array($value) ? str_replace('$url', $url, $value) : $this->_getButtons($value);
+        }
+        return $result;
     }
 }

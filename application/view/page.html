@@ -1,24 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
         <title>+title+</title>
-        <base href="+site_base+" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="/version/+site.version+/css/style.css" />
-        +header_extra+
+        <script src="//code.jquery.com/jquery.min.js" type="application/javascript"></script>
+        <link href="/version/+site.version+/css/theme.css" rel="stylesheet">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        +buttons+
-        <div class="clear"></div>
-        <div id="site_container">
-            <h1>+title+</h1>
-            +content+
-            <div class="clear"></div>
+        +menu+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h4>+page+</h4></div>
+                        <div class="panel-body">
+                            +content+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="copyright">
+        <div class="navbar navbar-inverse copyright">
             <p><a href="https://github.com/Nimja/UltraLight-Core">Source on Github: UltraLight - Core (the framework)</a></p>
             <p><a href="https://github.com/Nimja/UltraLight-Example">Source on Github: UltraLight - Example (this site)</a></p>
-            <p><a href="http://nimja.com"><img src="assets/images/logo.png" />Copyright &copy; Nimja.com 2013</a></p>
+            <p><a href="http://nimja.com"><img src="assets/images/logo.png" alt="Ultralight Logo" /> Copyright &copy; Nimja.com 2014</a></p>
         </div>
     </body>
 </html>
