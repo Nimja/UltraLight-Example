@@ -7,35 +7,4 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [L,QSA]
 
 php_flag register_globals Off
-<IfModule mod_gzip.c>
-	mod_gzip_on Yes 
-	mod_gzip_dechunk Yes 
-	mod_gzip_keep_workfiles No 
-	mod_gzip_can_negotiate Yes 
-	mod_gzip_add_header_count Yes 
-	mod_gzip_send_vary Yes 
-	mod_gzip_min_http 1000 
-	mod_gzip_minimum_file_size 300 
-	mod_gzip_maximum_file_size 512000 
-	mod_gzip_maximum_inmem_size 60000 
-	mod_gzip_handle_methods GET POST 
-	mod_gzip_temp_dir /tmp 
-
-	# phase 1 - Both phases must work.
-	mod_gzip_item_include file *
-	# phase 2 - mime/handler, exclusions.
-	mod_gzip_item_include mime ^application/javascript$
-	mod_gzip_item_include mime ^application/x-javascript$
-	mod_gzip_item_include mime ^text/.* 
-	mod_gzip_item_include mime ^httpd/unix-directory$ 
-	mod_gzip_item_include handler ^cgi-script$ 
-	mod_gzip_item_include handler ^server-status$ 
-	mod_gzip_item_include handler ^server-info$ 
-	mod_gzip_item_include handler ^application/x-httpd-php 
-	# EXCLUDE:   images (GIF etc., will rarely ever save anything)
-	mod_gzip_item_exclude mime ^image/.* 
-</IfModule>
-<IfModule !mod_gzip.c>
-	php_flag zlib.output_compression On
-	php_value zlib.output_compression_level 5
-</IfModule>
+SetEnv no-gzip 1
