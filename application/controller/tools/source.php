@@ -6,7 +6,7 @@ class Source extends \App\Controller\Index
 {
     const TYPE_CONTROLLER = 'controller';
     const TYPE_VIEW = 'view';
-    const REDIRECT_TARGET = '/source/controller/index';
+    const REDIRECT_TARGET = '/source/controller';
     /**
      * Configuration list for the source viewing.
      * @var array
@@ -41,7 +41,7 @@ class Source extends \App\Controller\Index
      */
     private $_type;
     /**
-     * Current files.
+     * Current file.
      * @var string
      */
     private $_file;
@@ -52,24 +52,34 @@ class Source extends \App\Controller\Index
      */
     protected function _run()
     {
-        $buttons = array(
-            '' => 'Home',
-        );
+        $config = $this->_getConfig();
+        $fileName = PATH_APP . "{$config['fileBase']}{$this->_file}.{$config['extension']}";
+        $title = "Source for {$this->_type}:{$this->_file}";
+        return $this->_output($title, $this->_createList() . highlight_file($fileName, true));
+    }
+
+    /**
+     * Set file and type.
+     */
+    private function _setFileAndType()
+    {
         $parts = explode('/', \Core::$rest);
         $this->_type = array_shift($parts);
-        $this->_file = implode('/', $parts);
-        if (!isset($this->_config[$this->_type])) {
+        $this->_file = !empty($parts) ? implode('/', $parts) : 'index';
+    }
+
+    /**
+     * Get config and set file/type.
+     * @return type
+     */
+    private function _getConfig()
+    {
+        $this->_setFileAndType();
+        $config = getKey($this->_config, $this->_type);
+        if (empty($config) || !in_array($this->_file, $config['files'])) {
             \Request::redirect(self::REDIRECT_TARGET);
         }
-        $config = $this->_config[$this->_type];
-        if (!in_array($this->_file, $config['files'])) {
-            \Request::redirect('/source/controller/index');
-        }
-        if ($this->_type == self::TYPE_CONTROLLER) {
-            $buttons[$this->_file] = 'View normal';
-        }
-        $fileName = PATH_APP . "{$config['fileBase']}{$this->_file}.{$config['extension']}";
-        return $this->_output("Source for {$this->_file}", $this->_createList() . highlight_file($fileName, true));
+        return $config;
     }
 
     /**
@@ -93,13 +103,13 @@ class Source extends \App\Controller\Index
      */
     private function _createSection($name, $section)
     {
-        $highLight = $name == $this->_type;
+        $highLight = ($name == $this->_type);
         $result = "<div class=\"section\"><h3>$name</h3><ul>";
         foreach ($section['files'] as $file) {
             $curLight = $highLight && $file == $this->_file;
             $link = "/source/$name/$file";
-            $class = $curLight ? 'class="current"' : '';
-            $result .= "<li $class><a href=\"$link\">$file</a>";
+            $class = $curLight ? 'class="text-success"' : '';
+            $result .= "<li $class><a href=\"$link\" $class>$file</a>";
         }
         $result .= '</ul></div>';
         return $result;
