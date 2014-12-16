@@ -55,7 +55,17 @@ class Source extends \App\Controller\Index
         $config = $this->_getConfig();
         $fileName = PATH_APP . "{$config['fileBase']}{$this->_file}.{$config['extension']}";
         $title = "Source for {$this->_type}:{$this->_file}";
-        return $this->_output($title, $this->_createList() . highlight_file($fileName, true));
+        return $this->_output($title, $this->_createList() . $this->_showSource($fileName));
+    }
+
+    /**
+     * Highlight source and escape for view.
+     * @param string $fileName
+     * @return string
+     */
+    private function _showSource($fileName)
+    {
+        return \Core\View::escape(highlight_file($fileName, true));
     }
 
     /**
