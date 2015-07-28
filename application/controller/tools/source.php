@@ -17,6 +17,7 @@ class Source extends \App\Controller\Index
             'extension' => 'php',
             'files' => array(
                 'index',
+                'color',
                 'errors',
                 'form',
                 'wrong',
@@ -30,6 +31,7 @@ class Source extends \App\Controller\Index
             'extension' => 'html',
             'files' => array(
                 'ajax',
+                'color',
                 'errors',
                 'features',
             )
