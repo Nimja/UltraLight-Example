@@ -16,6 +16,7 @@ class Index extends \Core\Controller
         'Home' => '/',
         'Examples' => array(
             'Form Example' => '/form',
+            'Color Example' => '/color',
             'AJAX example' => '/ajax',
             'Error example' => '/errors',
             'Wrong page' => '/wrong',
