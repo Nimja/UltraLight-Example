@@ -27,8 +27,14 @@ class Index extends \Core\Controller
 
     protected function _run()
     {
+        \Core\View::registerTransformer('custom', '\App\Library\Transform\Custom');
         return $this->_output(
-                'Features', $this->_show('page/features', array('transform' => 'example|transform|text'), true)
+            'Features',
+            $this->_show(
+                'page/features',
+                array('transform' => 'example|transform|text', 'value' => rand(0, 1000)),
+                true
+            )
         );
     }
 
