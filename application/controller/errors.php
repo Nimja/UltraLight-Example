@@ -11,13 +11,13 @@ class Errors extends Index
     protected function _run()
     {
         echo $this->_output('Error Example', $this->_show('page/errors', null, true));
-        $array = array(true, 1, "String", 'last' => null);
+        $array = [true, 1, "String", 'last' => null];
         $obj = new \stdClass();
         $obj->boolean = true;
         $obj->integer = 1;
         $obj->string = "String";
         $obj->null = null;
-		$test = array(
+		$test = [
 			'This is an example',
 			$array,
             $obj,
@@ -25,7 +25,7 @@ class Errors extends Index
 			'alert("Test!");',
 			'Unescaped GET' => $_GET,
 			'Sanitized GET' => \Sanitize::clean($_GET),
-		);
+		];
 		\Show::debug($test);
         \Show::info('Info message example.');
         \Show::error('Error message example.');

@@ -10,25 +10,25 @@ class Example extends \Core\Controller\Ajax
     {
         //We pause one quarter of a second on purpose.
         usleep(250000);
-        $hello = array(
+        $hello = [
             'Hello',
             'Good day',
             'Hi',
             'Aloha',
             'Hey',
-        );
+        ];
         shuffle($hello);
-        $world = array(
+        $world = [
             'world',
             'globe',
             'planet',
             'earth',
-        );
+        ];
         shuffle($world);
         $clicked = \Request::value('clicked');
-        return array(
+        return [
             'message' => "{$hello[0]} {$world[0]}!",
             'clicked' => "You have clicked $clicked times!",
-        );
+        ];
     }
 }

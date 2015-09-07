@@ -9,12 +9,12 @@ class Color extends Index
     protected function _run()
     {
         $gamma = \Request::value('gamma', \Core\Format\Color::GAMMA);
-        $data = array(
+        $data = [
             'gamma' => $gamma,
-            'gradient1' => $this->_drawColorFade(array('ff0000', '0000ff', '00ff00', 'ff0000'), $gamma),
-            'gradient2' => $this->_drawColorFade(array('ffff00', '00ffff', 'ff00ff', 'ffff00'), $gamma),
-            'gradient3' => $this->_drawColorFade(array('ffffff', '000000', '99ccff', 'ff99cc'), $gamma),
-        );
+            'gradient1' => $this->_drawColorFade(['ff0000', '0000ff', '00ff00', 'ff0000'], $gamma),
+            'gradient2' => $this->_drawColorFade(['ffff00', '00ffff', 'ff00ff', 'ffff00'], $gamma),
+            'gradient3' => $this->_drawColorFade(['ffffff', '000000', '99ccff', 'ff99cc'], $gamma),
+        ];
         return $this->_output('Color fades', $this->_show('page/color', $data));
     }
 
@@ -26,7 +26,7 @@ class Color extends Index
     private function _drawColorFade($blocks, $gamma)
     {
         $previousBlock = array_shift($blocks);
-        $colors = array();
+        $colors = [];
         foreach ($blocks as $block) {
             $from = new \Core\Format\Color($previousBlock, $gamma);
             $to = new \Core\Format\Color($block, $gamma);
@@ -45,7 +45,7 @@ class Color extends Index
      */
     private function _drawColors($colors)
     {
-        $result = array();
+        $result = [];
         foreach ($colors as $color) {
             $result[] = "<div style=\"background: {$color}; overflow: hidden; height: 4px; \">&nbsp;</div>";
         }

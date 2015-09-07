@@ -11,11 +11,11 @@ class Source extends \App\Controller\Index
      * Configuration list for the source viewing.
      * @var array
      */
-    private $_config = array(
-        self::TYPE_CONTROLLER => array(
+    private $_config = [
+        self::TYPE_CONTROLLER => [
             'fileBase' => 'controller/',
             'extension' => 'php',
-            'files' => array(
+            'files' => [
                 'index',
                 'color',
                 'errors',
@@ -24,19 +24,19 @@ class Source extends \App\Controller\Index
                 'ajax',
                 'ajax/example',
                 'tools/source',
-            )
-        ),
-        self::TYPE_VIEW => array(
+            ]
+        ],
+        self::TYPE_VIEW => [
             'fileBase' => 'view/page/',
             'extension' => 'html',
-            'files' => array(
+            'files' => [
                 'ajax',
                 'color',
                 'errors',
                 'features',
-            )
-        ),
-    );
+            ]
+        ],
+    ];
     /**
      * Current type.
      * @var string
@@ -100,7 +100,7 @@ class Source extends \App\Controller\Index
      */
     private function _createList()
     {
-        $result = array();
+        $result = [];
         foreach ($this->_config as $name => $section) {
             $result[] = $this->_createSection($name, $section);
         }

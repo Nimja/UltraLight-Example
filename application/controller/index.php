@@ -12,18 +12,18 @@ class Index extends \Core\Controller
      * All menu buttons for this controller.
      * @var array
      */
-    protected $_buttons = array(
+    protected $_buttons = [
         'Home' => '/',
-        'Examples' => array(
+        'Examples' => [
             'Form Example' => '/form',
             'Color Example' => '/color',
             'AJAX example' => '/ajax',
             'Error example' => '/errors',
             'Wrong page' => '/wrong',
-        ),
+        ],
         'View source' => 'source/controller/$url',
         'Debug' => '/$url?debug=true'
-    );
+    ];
 
     protected function _run()
     {
@@ -32,7 +32,7 @@ class Index extends \Core\Controller
             'Features',
             $this->_show(
                 'page/features',
-                array('transform' => 'example|transform|text', 'value' => rand(0, 1000)),
+                ['transform' => 'example|transform|text', 'value' => rand(0, 1000)],
                 true
             )
         );
@@ -48,13 +48,13 @@ class Index extends \Core\Controller
     {
         $buttons = $this->_getButtons($this->_buttons);
         return $this->_show('page',
-                array(
+            [
                 'title' => 'UltraLight Showcase',
                 'page' => $title,
                 'menu' => new \Core\Bootstrap\Navbar('UltraLight', $buttons, \Core::$url,
                     'navbar-inverse navbar-fixed-top'),
                 'content' => $content
-                )
+            ]
         );
     }
 
@@ -64,7 +64,7 @@ class Index extends \Core\Controller
      */
     private function _getButtons($buttons)
     {
-        $result = array();
+        $result = [];
         $url = \Core::$url;
         foreach ($buttons as $key => $value) {
             $result[$key] = !is_array($value) ? str_replace('$url', $url, $value) : $this->_getButtons($value);
