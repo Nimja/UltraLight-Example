@@ -27,7 +27,7 @@ class Form extends Index
                     ['label' => 'Multi Select', 'multiple' => true, 'values' => $example, 'default' => '-select-']
                 )
             )
-            ->add(new Field\CheckBoxes('checkboxes', ['label' => 'Upload', 'values' => $values]))
+            ->add(new Field\CheckBoxes('checkboxes', ['label' => 'Multi checkboxes', 'values' => $values]))
             ->add(new Field\Upload('upload', ['label' => 'Upload', 'value' => '']))
             ->fieldSet("Submit button")
             ->add(new Field\Submit('submit', ['value' => 'Submit', 'class' => 'btn btn-primary']));
