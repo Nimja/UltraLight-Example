@@ -27,6 +27,9 @@ class Index extends \Core\Controller
 
     protected function _run()
     {
+        if (\Core::$rest) {
+            return $this->_showError(\Request::STATUS_ERROR_NOT_FOUND, 'error');
+        }
         \Core\View::registerTransformer('custom', '\App\Library\Transform\Custom');
         return $this->_output(
             'Features',
