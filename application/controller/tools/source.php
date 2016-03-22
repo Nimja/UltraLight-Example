@@ -32,11 +32,11 @@ class Source extends \App\Controller\Index
             'fileBase' => 'view/page/',
             'extension' => 'html',
             'files' => [
-                'ajax',
-                'color',
-                'errors',
                 'features',
                 'html',
+                'color',
+                'ajax',
+                'errors',
             ]
         ],
         self::TYPE_LIBRARY => [
