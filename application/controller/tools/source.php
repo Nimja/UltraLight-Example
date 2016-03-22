@@ -6,6 +6,7 @@ class Source extends \App\Controller\Index
 {
     const TYPE_CONTROLLER = 'controller';
     const TYPE_VIEW = 'view';
+    const TYPE_LIBRARY = 'library';
     const REDIRECT_TARGET = '/source/controller';
     /**
      * Configuration list for the source viewing.
@@ -17,12 +18,13 @@ class Source extends \App\Controller\Index
             'extension' => 'php',
             'files' => [
                 'index',
-                'color',
-                'errors',
                 'form',
-                'wrong',
+                'color',
                 'ajax',
                 'ajax/example',
+                'ajax/error',
+                'errors',
+                'wrong',
                 'tools/source',
             ]
         ],
@@ -34,6 +36,15 @@ class Source extends \App\Controller\Index
                 'color',
                 'errors',
                 'features',
+                'html',
+            ]
+        ],
+        self::TYPE_LIBRARY => [
+            'fileBase' => 'library/',
+            'extension' => 'php',
+            'files' => [
+                'sourcelist',
+                'transform/custom',
             ]
         ],
     ];
@@ -54,10 +65,15 @@ class Source extends \App\Controller\Index
      */
     protected function _run()
     {
-        $config = $this->_getConfig();
-        $fileName = PATH_APP . "{$config['fileBase']}{$this->_file}.{$config['extension']}";
-        $title = "Source for {$this->_type}:{$this->_file}";
-        return $this->_output($title, $this->_createList() . $this->_showSource($fileName));
+        $this->_setFileAndType();
+        $data = [
+            'source' => $this->_showSource($this->_getFileName()),
+            'list' => new \App\Library\Sourcelist($this->_config, "/source/{$this->_type}/{$this->_file}"),
+        ];
+        return $this->_output(
+            "Source for {$this->_type}:{$this->_file}",
+            $this->_show('page/source', $data)
+        );
     }
 
     /**
@@ -82,48 +98,24 @@ class Source extends \App\Controller\Index
 
     /**
      * Get config and set file/type.
-     * @return type
+     * @return string
      */
-    private function _getConfig()
+    private function _getFileName()
     {
-        $this->_setFileAndType();
         $config = getKey($this->_config, $this->_type);
         if (empty($config) || !in_array($this->_file, $config['files'])) {
             \Request::redirect(self::REDIRECT_TARGET);
         }
-        return $config;
-    }
-
-    /**
-     * Create list of all sources.
-     * @return string
-     */
-    private function _createList()
-    {
-        $result = [];
-        foreach ($this->_config as $name => $section) {
-            $result[] = $this->_createSection($name, $section);
-        }
-        return '<div style="float: right;">' . implode(PHP_EOL, $result) . '</div>';
-    }
-
-    /**
-     * Create section for list.
-     * @param string $name
-     * @param array $section
-     * @return string
-     */
-    private function _createSection($name, $section)
-    {
-        $highLight = ($name == $this->_type);
-        $result = "<div class=\"section\"><h3>$name</h3><ul>";
-        foreach ($section['files'] as $file) {
-            $curLight = $highLight && $file == $this->_file;
-            $link = "/source/$name/$file";
-            $class = $curLight ? 'class="text-success"' : '';
-            $result .= "<li $class><a href=\"$link\" $class>$file</a>";
-        }
-        $result .= '</ul></div>';
-        return $result;
+        $fileName = implode(
+            '',
+            [
+                PATH_APP ,
+                $config['fileBase'],
+                $this->_file,
+                '.',
+                $config['extension']
+            ]
+        );
+        return $fileName;
     }
 }

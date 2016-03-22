@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller;
 /**
- * Show a system-generated error
+ * Show a system-generated error.
+ *
+ * Controller: "wrong" not extended from abstract controller.
  */
 class Wrong
 {

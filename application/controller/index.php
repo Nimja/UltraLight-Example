@@ -1,6 +1,6 @@
 <?php namespace App\Controller;
 /**
- * By exception we allow this to be present.
+ * This is an anti-pattern, but for the demo we allow it.
  */
 \Core::$debug = (\Request::value('debug') || \Config::system()->get('system', 'debug', false));
 /**
@@ -54,15 +54,22 @@ class Index extends \Core\Controller
             [
                 'title' => 'UltraLight Showcase',
                 'page' => $title,
-                'menu' => new \Core\Bootstrap\Navbar('UltraLight', $buttons, \Core::$url,
-                    'navbar-inverse navbar-fixed-top'),
+                'menu' => new \Core\Bootstrap\Navbar(
+                    'UltraLight',
+                    $buttons,
+                    \Core::$url,
+                    'navbar-inverse navbar-fixed-top'
+                ),
                 'content' => $content
             ]
         );
     }
 
     /**
-     * Get buttons array with url replaced.
+     * This would normally not be needed, but we have dynamic buttons for the current page.
+     *
+     * This replaces all instances of $url with the current url. Used for the Debug and Source buttons.
+     *
      * @return array
      */
     private function _getButtons($buttons)

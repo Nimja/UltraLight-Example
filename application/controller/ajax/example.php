@@ -1,34 +1,32 @@
-<?php
-namespace App\Controller\Ajax;
+<?php namespace App\Controller\Ajax;
 /**
- * Simple index page, with some buttons for show.
+ * Simple Ajax example, automatically outputs JSON with results.
  */
 class Example extends \Core\Controller\Ajax
 {
 
     protected function _run()
     {
-        //We pause one quarter of a second on purpose.
+        //We pause one quarter of a second on purpose, otherwise it's too fast.
         usleep(250000);
-        $hello = [
-            'Hello',
-            'Good day',
-            'Hi',
-            'Aloha',
-            'Hey',
-        ];
-        shuffle($hello);
-        $world = [
-            'world',
-            'globe',
-            'planet',
-            'earth',
-        ];
-        shuffle($world);
         $clicked = \Request::value('clicked');
         return [
-            'message' => "{$hello[0]} {$world[0]}!",
+            'message' => $this->_getHelloWorld(),
             'clicked' => "You have clicked $clicked times!",
         ];
+    }
+
+    /**
+     * Get semi-randomized hello world string.
+     *
+     * @return string
+     */
+    private function _getHelloWorld()
+    {
+        $hello = ['Hello', 'Good day', 'G\'day', 'Hi', 'Aloha', 'Hey'];
+        $world = ['world', 'globe', 'planet', 'earth'];
+        shuffle($hello);
+        shuffle($world);
+        return "{$hello[0]} {$world[0]}!";
     }
 }

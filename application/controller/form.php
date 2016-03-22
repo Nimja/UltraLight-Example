@@ -20,7 +20,7 @@ class Form extends Index
             ->add(new Field\Radio('radio', ['label' => 'Radio', 'values' => $example]))
             ->add(new Field\CheckBox('checkbox', ['label' => 'Checkbox?']))
             ->fieldSet("Advanced Fields")
-            ->add('<div style="color: red; border: 2px solid orange; margin: 20px; padding: 10px;">Example of plain HTML in a form, for whatever reason.</div>')
+            ->add(new Field\Raw('html', ['label' => "Raw", 'html' => $this->_show('form/html')]))
             ->add(
                 new Field\Select(
                     'multiselect',

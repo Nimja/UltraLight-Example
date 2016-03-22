@@ -1,18 +1,31 @@
 <p>This is a simple example of an ajax request.</p>
-<p><a id="testButton" class="btn btn-large btn-success">Click this button!!</a><p>
+<p>
+    <a id="testSuccess" class="btn btn-large btn-success">Click this button!!</a>
+    <a id="testError" class="btn btn-large btn-danger">Or this button!!</a>
+<p>
 <div id="testResult" class="clear" style="margin: 20px; height: 80px;"></div>
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script>
     var clicked = 0;
-    $('#testButton').click(function() {
-        clicked++;
-        $('#testResult').html('Loading...');
-        $.post('/ajax/example', {clicked: clicked}, function(data) {
-            var date = new Date(data.time * 1000);
-            var text = "<p>Time: " + date.toUTCString() + "</p>";
+    function handleResult(data) {
+        var date = new Date(data.time * 1000);
+        var text = "<p>Time: " + date.toUTCString() + "</p>";
+        if (data.content) {
             text += "<p>Message: <b>" + data.content.message + "</b></p>";
             text += "<p>" + data.content.clicked + "</p>";
-            $('#testResult').html(text);
-        }, 'json');
+        } else {
+            text += "<p class=\"text-warning\">Error: <b>" + data.error + "</b></p>";
+        }
+        $('#testResult').html(text);
+    }
+    $('#testSuccess').click(function() {
+        clicked++;
+        $('#testResult').html('Loading...');
+        $.post('/ajax/example', {clicked: clicked}, handleResult, 'json');
+    });
+    $('#testError').click(function() {
+        clicked++;
+        $('#testResult').html('Loading...');
+        $.post('/ajax/error', {clicked: clicked}, handleResult, 'json');
     });
 </script>
