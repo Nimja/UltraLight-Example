@@ -20,6 +20,7 @@ class Index extends \Core\Controller
             'AJAX example' => '/ajax',
             'Error example' => '/errors',
             'Wrong page' => '/wrong',
+            'Not found' => '/not_found',
         ],
         'View source' => 'source/controller/$url',
         'Debug' => '/$url?debug=true'
@@ -27,6 +28,7 @@ class Index extends \Core\Controller
 
     protected function _run()
     {
+        // If there is any remaining part of the url, we show an error page, as expected.
         if (\Core::$rest) {
             return $this->_showError(\Request::STATUS_ERROR_NOT_FOUND, 'error');
         }
@@ -35,7 +37,7 @@ class Index extends \Core\Controller
             'Features',
             $this->_show(
                 'page/features',
-                ['transform' => 'example|transform|text', 'value' => rand(0, 1000)],
+                ['transform' => 'example|transform|text', 'value' => rand(-2000000, 2000000)],
                 true
             )
         );
