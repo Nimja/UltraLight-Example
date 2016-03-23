@@ -2,7 +2,7 @@
 /**
  * Require the core file.
  */
-require_once '../../../core4/core.php';
+require_once '../../shared/core/core.php';
 /**
  * Start the application.
  */
